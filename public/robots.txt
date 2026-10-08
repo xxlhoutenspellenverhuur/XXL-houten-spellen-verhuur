@@ -1,14 +1,3 @@
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
-User-agent: Twitterbot
-Allow: /
-
-User-agent: facebookexternalhit
-Allow: /
-
 User-agent: *
 Allow: /
+# Voeg na livegang toe: Sitemap: https://JOUWDOMEIN/sitemap.xml

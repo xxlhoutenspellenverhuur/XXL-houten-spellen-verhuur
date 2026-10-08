@@ -27,3 +27,14 @@ npm run dev
 - TypeScript
 - React
 - Tailwind CSS
+
+## XXL Hollandse Spellen — checklist vóór livegang
+- [ ] Domein invullen in `src/config/site.ts` (`domain`) → canonical + structured data
+- [ ] Zakelijk e-mailadres invullen in `src/config/site.ts` (`email`)
+- [ ] Foto van pittenzak gooien + foto van Eric & Timo toevoegen (`src/config/site.ts`)
+- [ ] Echt logo plaatsen in `src/components/site/Header.tsx` en favicon in `public/`
+- [ ] Privacytekst laten controleren (`src/routes/privacy.tsx`)
+- [ ] `public/sitemap.xml` maken met het definitieve domein en indienen in Google Search Console
+
+Aanvragen uit het formulier worden opgeslagen in Lovable Cloud → Database → `booking_requests`.
+Prijzen, spellen en contactnummers staan centraal in `src/config/site.ts`.
