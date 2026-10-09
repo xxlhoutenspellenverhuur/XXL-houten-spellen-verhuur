@@ -1,14 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { Cake, GraduationCap, Briefcase, Users, Wine, Heart, Phone, MessageCircle, Hammer, MapPin, Check, ChevronDown } from "lucide-react";
+import { Phone, MessageCircle, MapPin, Check, Mail } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Photo } from "@/components/site/Photo";
-import { ContactForm } from "@/components/site/ContactForm";
-import { site, games, pkg, separateTotal, euro, photos, waLink, type GameId } from "@/config/site";
+import { ContactForm, type Sel } from "@/components/site/ContactForm";
+import { site, games, pkg, separateTotal, euro, photos, waLink } from "@/config/site";
 
 const TITLE = "XXL houten spellen huren in Eindhoven | XXL Hollandse Spellen";
 const DESC =
-  "Huur handgemaakte XXL houten spellen in Eindhoven: XXL Jenga, zenuwspiraal, knikkerdoolhof en pittenzak gooien. Los vanaf €12,50 of alle vier voor €49 per dag.";
+  "Huur handgemaakte XXL houten spellen in Eindhoven: XXL Jenga, zenuwspiraal, knikkerdoolhof en pittenzak gooien. Per stuk vanaf €12,50 of alle vier voor €49 per dag.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -41,26 +41,6 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-type Sel = GameId | "pakket";
-
-const faqs = [
-  ["Welke spellen kan ik huren?", "Je kunt kiezen uit XXL Jenga, de zenuwspiraal, het XXL houten knikkerdoolhof en pittenzak gooien. Je kunt de spellen los huren of samen als pakket voor €49 per dag."],
-  ["Wat kost het huren van de spellen?", "XXL Jenga kost €12,50 per dag, de zenuwspiraal €20 per dag, het XXL houten knikkerdoolhof €12,50 per dag en pittenzak gooien €12,50 per dag. Het pakket met alle vier de spellen kost €49 per dag."],
-  ["Waar kan ik de spellen ophalen?", "Ophalen kan in Eindhoven, in de omgeving van bedrijventerrein De Hurk. We stemmen de exacte locatie en praktische afspraken persoonlijk met je af."],
-  ["Kan ik de spellen huren voor mijn feest of evenement?", "Ja, de spellen zijn bedoeld voor uiteenlopende feesten en evenementen, van verjaardagen en borrels tot studentenactiviteiten en bedrijfsfeesten."],
-  ["Hoe weet ik of de spellen beschikbaar zijn?", "Stuur ons een aanvraag met de gewenste datum en spellen. We controleren de beschikbaarheid en bevestigen de afspraken persoonlijk."],
-  ["Bezorgen jullie de spellen?", "Op dit moment gaan we uit van ophalen in Eindhoven. We bieden op de website geen bezorgservice aan."],
-  ["Hoe kan ik een aanvraag doen?", "Je kunt het contactformulier invullen, ons bellen of via WhatsApp contact opnemen."],
-];
-
-const occasions = [
-  [Cake, "Verjaardagen en tuinfeesten"],
-  [GraduationCap, "Studentenfeesten en verenigingen"],
-  [Briefcase, "Bedrijfsfeesten en teamdagen"],
-  [Users, "Familie- en buurtfeesten"],
-  [Wine, "Borrelmiddagen"],
-  [Heart, "Bruiloften en evenementen"],
-] as const;
 
 function Index() {
   const [selected, setSelected] = useState<Sel[]>([]);
@@ -82,33 +62,30 @@ function Index() {
           <Photo photo={photos.hero} eager className="absolute inset-0 h-full w-full" />
           <div className="absolute inset-0 bg-hero-overlay" />
           <div className="relative mx-auto w-full max-w-6xl px-5 pb-14 pt-32 md:pb-20">
-            <p className="eyebrow text-wood-light">Handgemaakt in Eindhoven</p>
-            <h1 className="mt-4 max-w-3xl text-5xl font-extrabold leading-[0.95] sm:text-6xl md:text-8xl">
-              Grote spellen. Goede momenten.
+            <p className="eyebrow text-wood-light">XXL Hollandse Spellen · Eindhoven</p>
+            <h1 className="mt-4 max-w-3xl text-4xl font-extrabold leading-[1.02] sm:text-5xl md:text-7xl">
+              Handgemaakt XXL spellen voor jouw feest of evenement
             </h1>
             <p className="mt-6 max-w-xl text-lg opacity-90 md:text-xl">
-              Op zoek naar iets leuks voor je feest, borrel of evenement? Huur onze zelfgemaakte XXL houten spellen en maak er samen iets bijzonders van.
+              Wij verhuren XXL houten spellen voor jullie vermaak. Alle spellen hebben we zelf gemaakt en zijn per stuk of als pakket te huur.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <a href="#spellen" className="rounded-lg bg-cta px-6 py-4 text-center font-bold text-cta-foreground transition hover:brightness-110">
                 Bekijk onze spellen
               </a>
               <button onClick={() => request("pakket")} className="rounded-lg border-2 border-forest-foreground/70 px-6 py-4 font-bold transition hover:bg-forest-foreground/10">
-                Vraag het XXL-pakket aan — €49 per dag
+                Pakket: alle vier voor €49
               </button>
             </div>
-            <p className="mt-8 text-sm font-medium opacity-80">
-              Zelf gemaakt in Eindhoven · Ophalen in Eindhoven · Voor feesten en evenementen
-            </p>
           </div>
         </section>
 
         {/* SPELLEN */}
         <section id="spellen" className="mx-auto max-w-6xl px-5 py-20 md:py-28">
-          <p className="eyebrow text-accent">XXL houten spellen huren</p>
-          <h2 className="mt-3 max-w-2xl text-4xl font-extrabold md:text-5xl">Maak van ieder feest een spelletje</h2>
+          <p className="eyebrow text-accent">Onze spellen</p>
+          <h2 className="mt-3 max-w-2xl text-4xl font-extrabold md:text-5xl">Wat je bij ons kunt huren</h2>
           <p className="mt-4 max-w-2xl text-lg text-muted-foreground">
-            Van een fanatieke uitdaging met vrienden tot een gezellige activiteit met collega's: onze handgemaakte houten spellen zorgen voor plezier, competitie en mooie momenten.
+            Voor verjaardagen, borrels, bedrijfsfeesten, studentenactiviteiten of een bruiloft. Prijzen zijn per dag.
           </p>
           <div className="mt-12 grid gap-6 sm:grid-cols-2">
             {games.map((g) => (
@@ -119,8 +96,9 @@ function Index() {
                 <div className="flex flex-1 flex-col p-6">
                   <div className="flex items-baseline justify-between gap-4">
                     <h3 className="text-2xl font-bold">{g.name}</h3>
-                    <p className="shrink-0 font-display text-xl font-bold text-accent">
+                    <p className="shrink-0 text-right font-display text-xl font-bold text-accent">
                       {euro(g.price)}<span className="text-sm font-medium text-muted-foreground"> /dag</span>
+                      <span className="block font-sans text-xs font-medium text-muted-foreground">+ borg</span>
                     </p>
                   </div>
                   <p className="mt-3 text-muted-foreground">{g.description}</p>
@@ -148,7 +126,7 @@ function Index() {
                 Los samen {euro(separateTotal)} — je bespaart {euro(separateTotal - pkg.price)}
               </p>
               <p className="mt-6 text-lg opacity-90">
-                Liever meteen goed uitpakken? Huur alle vier onze XXL houten spellen samen voor één vaste pakketprijs. Ideaal voor een feest, familiedag, studentenactiviteit, borrel of bedrijfsuitje.
+                Huur alle vier de spellen samen voor één vaste prijs.
               </p>
               <ul className="mt-6 space-y-2">
                 {games.map((g) => (
@@ -203,9 +181,9 @@ function Index() {
           <div className="grid gap-10 lg:grid-cols-[1fr_1.6fr]">
             <div>
               <p className="eyebrow text-accent">Contact</p>
-              <h2 className="mt-3 text-4xl font-extrabold md:text-5xl">Welk spel maakt jouw feest compleet?</h2>
+              <h2 className="mt-3 text-4xl font-extrabold md:text-5xl">Aanvraag doen</h2>
               <p className="mt-4 text-lg text-muted-foreground">
-                Vertel ons wat je organiseert en welke spellen je wilt huren. We nemen persoonlijk contact met je op om de mogelijkheden te bespreken.
+                Laat weten wanneer en welke spellen je wilt huren. We reageren zelf en checken of ze vrij zijn.
               </p>
               <div className="mt-8 rounded-xl border bg-card p-5">
                 <p className="text-sm text-muted-foreground">Liever mailen?</p>
@@ -224,43 +202,29 @@ function Index() {
       </main>
 
       <footer className="bg-forest text-forest-foreground">
-        <div className="mx-auto grid max-w-6xl gap-10 px-5 py-14 md:grid-cols-3">
+        <div className="mx-auto flex max-w-6xl flex-col gap-8 px-5 py-12 md:flex-row md:justify-between">
           <div>
-            <p className="font-display text-2xl font-extrabold">{site.name}</p>
+            <p className="font-display text-xl font-extrabold">{site.name}</p>
             <p className="eyebrow mt-1 text-wood-light">{site.tagline}</p>
+            <a href={`mailto:${site.email}`} className="mt-4 inline-flex items-center gap-2 text-sm hover:underline">
+              <Mail className="h-4 w-4" /> {site.email}
+            </a>
           </div>
-          <nav aria-label="Footer" className="flex flex-col gap-2 text-sm">
-            <a href="#spellen" className="hover:underline">Onze spellen</a>
-            <a href="#verhaal" className="hover:underline">Ons verhaal</a>
-            <a href="#zo-werkt-het" className="hover:underline">Zo werkt het</a>
-            <a href="#contact" className="hover:underline">Contact</a>
-            <a href="/privacy" className="hover:underline">Privacybeleid</a>
-          </nav>
-          <div className="space-y-2 text-sm">
+          <ul className="space-y-2 text-sm">
             {site.phones.map((p) => (
-              <p key={p.tel}>
-                <a href={`tel:${p.tel}`} className="hover:underline">{p.display}</a> ·{" "}
-                <a href={waLink(p.wa)} target="_blank" rel="noopener noreferrer" className="hover:underline">WhatsApp</a>
-              </p>
+              <li key={p.tel} className="flex items-center gap-3">
+                <a href={`tel:${p.tel}`} className="inline-flex items-center gap-2 hover:underline"><Phone className="h-4 w-4" /> {p.display}</a>
+                <a href={waLink(p.wa)} target="_blank" rel="noopener noreferrer" aria-label={`WhatsApp ${p.display}`} className="inline-flex items-center gap-1 rounded-full border border-forest-foreground/30 px-2.5 py-0.5 text-xs hover:bg-forest-foreground/10">
+                  <MessageCircle className="h-3.5 w-3.5" /> WhatsApp
+                </a>
+              </li>
             ))}
-            {site.email && <p><a href={`mailto:${site.email}`} className="hover:underline">{site.email}</a></p>}
-          </div>
+          </ul>
         </div>
-        <p className="border-t border-forest-foreground/15 py-5 text-center text-xs opacity-70">
-          © {new Date().getFullYear()} {site.name}
+        <p className="border-t border-forest-foreground/15 py-4 text-center text-xs opacity-70">
+          © {new Date().getFullYear()} {site.name} · <a href="/privacy" className="hover:underline">Privacy</a>
         </p>
       </footer>
-
-      {/* Compacte WhatsApp-knop op mobiel */}
-      <a
-        href={waLink(site.phones[0].wa)}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Neem contact op via WhatsApp"
-        className="fixed bottom-4 right-4 z-40 flex h-12 w-12 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-card md:hidden"
-      >
-        <MessageCircle className="h-6 w-6" />
-      </a>
     </div>
   );
 }
