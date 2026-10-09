@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
-import { Menu, X, MessageCircle } from "lucide-react";
-import { site, waLink } from "@/config/site";
+import { Menu, X } from "lucide-react";
+import { site } from "@/config/site";
 import { cn } from "@/lib/utils";
 
 const links = [
   { href: "#spellen", label: "Onze spellen" },
-  { href: "#verhaal", label: "Ons verhaal" },
-  { href: "#zo-werkt-het", label: "Zo werkt het" },
-  { href: "#contact", label: "Contact" },
+  { href: "#verhaal", label: "Over ons" },
+    { href: "#contact", label: "Contact" },
 ];
 
 export function Header({ onRequestPackage }: { onRequestPackage: () => void }) {
@@ -44,15 +43,6 @@ export function Header({ onRequestPackage }: { onRequestPackage: () => void }) {
           ))}
         </nav>
         <div className="flex items-center gap-2">
-          <a
-            href={waLink(site.phones[0].wa)}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Neem contact op via WhatsApp"
-            className="hidden h-10 w-10 items-center justify-center rounded-full border border-current/30 sm:inline-flex"
-          >
-            <MessageCircle className="h-5 w-5" />
-          </a>
           <button
             onClick={onRequestPackage}
             className="hidden rounded-lg bg-cta px-4 py-2.5 text-sm font-bold text-cta-foreground transition hover:brightness-110 sm:inline-block"

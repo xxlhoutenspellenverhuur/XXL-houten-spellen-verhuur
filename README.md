@@ -30,7 +30,8 @@ npm run dev
 
 ## XXL Hollandse Spellen — checklist vóór livegang
 - [ ] Domein invullen in `src/config/site.ts` (`domain`) → canonical + structured data
-- [ ] Zakelijk e-mailadres invullen in `src/config/site.ts` (`email`)
+- [x] E-mailadres ingevuld
+- [ ] Activatiemail van FormSubmit in Gmail bevestigen (eenmalig)
 - [ ] Foto van pittenzak gooien + foto van Eric & Timo toevoegen (`src/config/site.ts`)
 - [ ] Echt logo plaatsen in `src/components/site/Header.tsx` en favicon in `public/`
 - [ ] Privacytekst laten controleren (`src/routes/privacy.tsx`)
