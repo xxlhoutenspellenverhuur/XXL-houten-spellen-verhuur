@@ -87,4 +87,4 @@ export const separateTotal = games.reduce((s, g) => s + g.price, 0);
 export const euro = (n: number) =>
   new Intl.NumberFormat("nl-NL", { style: "currency", currency: "EUR", minimumFractionDigits: n % 1 ? 2 : 0 }).format(n);
 
-export const selectableOptions = [...games.map((g) => ({ id: g.id, name: g.name })), { id: pkg.id, name: "Het XXL-pakket" }, { id: "anders", name: "Anders / weet ik nog niet" }];
+export const selectableOptions = [...games.map((g) => ({ id: g.id, name: g.name })), { id: pkg.id, name: "Het XXL-pakket" }, { id: "anders" as const, name: "Anders / weet ik nog niet" }];

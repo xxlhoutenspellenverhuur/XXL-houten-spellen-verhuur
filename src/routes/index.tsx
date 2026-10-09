@@ -171,101 +171,29 @@ function Index() {
           </div>
         </section>
 
-        {/* GELEGENHEDEN */}
-        <section className="mx-auto max-w-6xl px-5 py-20 md:py-28">
-          <div className="grid gap-10 md:grid-cols-[1fr_1.3fr] md:items-center">
-            <div>
-              <h2 className="text-4xl font-extrabold md:text-5xl">Een leuke toevoeging aan ieder evenement</h2>
-              <p className="mt-4 text-lg text-muted-foreground">
-                Of je nu iets organiseert voor vrienden, familie, collega's of een grotere groep: onze spellen brengen mensen samen en zorgen voor een leuke uitdaging.
-              </p>
-            </div>
-            <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-              {occasions.map(([Icon, text]) => (
-                <li key={text} className="flex flex-col gap-3 rounded-xl border bg-card p-4">
-                  <Icon className="h-6 w-6 text-accent" aria-hidden />
-                  <span className="text-sm font-semibold">{text}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </section>
-
-        {/* VERHAAL */}
+        {/* OVER ONS */}
         <section id="verhaal" className="bg-secondary">
-          <div className="mx-auto grid max-w-6xl items-center gap-12 px-5 py-20 md:grid-cols-2 md:py-28">
-            {/* TODO: vervang door een foto van Eric en Timo of van het bouwen */}
+          <div className="mx-auto grid max-w-6xl items-center gap-10 px-5 py-16 md:grid-cols-2 md:py-24">
             <div className="overflow-hidden rounded-2xl shadow-card">
               <Photo photo={photos.story} className="aspect-[4/3] h-full w-full" />
             </div>
             <div>
-              <p className="eyebrow text-accent">Ons verhaal</p>
-              <h2 className="mt-3 text-4xl font-extrabold md:text-5xl">Twee studenten. Vier spellen. Eén idee.</h2>
-              <div className="mt-6 space-y-4 text-lg text-secondary-foreground">
-                <p>Wij zijn Eric en Timo, twee studenten aan de TU/e met een gedeelde liefde voor klussen, spelletjes en leuke dingen organiseren.</p>
-                <p>We wilden allebei al langer graag een eigen bedrijfje beginnen. In plaats van alleen plannen te maken, zijn we zelf aan de slag gegaan: we hebben onze eigen XXL houten spellen bedacht, ontworpen en gemaakt in Eindhoven.</p>
-                <p>Wat begon als een idee om iets leuks te bouwen, is uitgegroeid tot een kleine onderneming waarmee we anderen een leuke dag willen bezorgen.</p>
-                <p>We vinden het mooi om met onze eigen handen iets te maken waar mensen samen plezier aan beleven. Daarom verhuren we onze spellen aan iedereen die zijn feest, borrel of evenement net wat leuker wil maken.</p>
+              <p className="eyebrow text-accent">Over ons</p>
+              <h2 className="mt-3 text-3xl font-extrabold md:text-4xl">Hoi, wij zijn Eric en Timo</h2>
+              <div className="mt-5 space-y-4 text-secondary-foreground">
+                <p>Wij zijn Eric en Timo, twee studenten met altijd al grote dromen. Met een gedeelde liefde voor klussen, spelletjes spelen en dingen organiseren, presenteren wij ons eigen bedrijfje.</p>
+                <p>We hebben vaak ideeën en zijn deze keer, in plaats van alleen plannen te maken, echt aan de slag gegaan. We hebben onze eigen XXL houten spellen bedacht, ontworpen en gemaakt in Eindhoven.</p>
+                <p>Wat begon met het idee om één spel te maken, beviel erg goed. Inmiddels zitten we al op vier spellen, en er komen er nog meer.</p>
+                <p>We vinden het mooi dat mensen veel plezier beleven aan onze zelfgemaakte spellen. Daarom verhuren we ze aan iedereen die zijn feest, borrel of evenement net wat leuker wil maken.</p>
               </div>
               <div className="mt-6 flex flex-wrap gap-3">
-                {[["Eric", "Applied Physics, TU/e"], ["Timo", "Stedenbouwkunde, TU/e"]].map(([n, s]) => (
+                {[["E", "Eric", "Applied Physics"], ["T", "Timo", "Urban Systems and Real Estate"]].map(([i, n, s]) => (
                   <div key={n} className="flex items-center gap-3 rounded-full bg-card py-2 pl-2 pr-5">
-                    <span className="flex h-9 w-9 items-center justify-center rounded-full bg-primary font-bold text-primary-foreground">{n[0]}</span>
+                    <span className="flex h-9 w-9 items-center justify-center rounded-full bg-primary font-bold text-primary-foreground">{i}</span>
                     <span className="text-sm"><strong>{n}</strong> — {s}</span>
                   </div>
                 ))}
               </div>
-              <p className="mt-8 font-semibold">Benieuwd naar onze spellen? We denken graag met je mee.</p>
-              <a href="#contact" className="mt-4 inline-block rounded-lg bg-primary px-6 py-3.5 font-bold text-primary-foreground transition hover:brightness-110">
-                Neem contact op
-              </a>
-            </div>
-          </div>
-        </section>
-
-        {/* ZO WERKT HET */}
-        <section id="zo-werkt-het" className="mx-auto max-w-6xl px-5 py-20 md:py-28">
-          <h2 className="text-4xl font-extrabold md:text-5xl">Zo heb je onze spellen in huis</h2>
-          <ol className="mt-12 grid gap-6 md:grid-cols-3">
-            {[
-              [Check, "Kies je spellen", "Bekijk het aanbod en kies losse spellen of het complete pakket."],
-              [MessageCircle, "Stuur ons een aanvraag", "Vertel ons wanneer je de spellen nodig hebt, voor welke gelegenheid en om welke spellen het gaat. We reageren persoonlijk en bespreken de mogelijkheden."],
-              [MapPin, "Haal de spellen op in Eindhoven", "De spellen worden opgehaald in Eindhoven, in de omgeving van bedrijventerrein De Hurk. De exacte ophaallocatie en praktische afspraken stemmen we na de aanvraag af."],
-            ].map(([Icon, t, d], i) => {
-              const I = Icon as typeof Check;
-              return (
-                <li key={i} className="relative rounded-2xl border bg-card p-6">
-                  <span className="font-display text-6xl font-extrabold text-wood-light">{i + 1}</span>
-                  <h3 className="mt-2 flex items-center gap-2 text-xl font-bold"><I className="h-5 w-5 text-accent" aria-hidden />{t as string}</h3>
-                  <p className="mt-2 text-muted-foreground">{d as string}</p>
-                </li>
-              );
-            })}
-          </ol>
-          <div className="mt-8 rounded-xl bg-muted p-5 text-sm">
-            <p className="font-semibold">Goed om te weten</p>
-            <ul className="mt-2 list-inside list-disc space-y-1 text-muted-foreground">
-              <li>We bieden op dit moment ophalen aan; er is geen standaard bezorgservice inbegrepen.</li>
-              <li>Een aanvraag is nog geen definitieve reservering.</li>
-              <li>De verhuur is pas bevestigd nadat wij persoonlijk de beschikbaarheid en afspraken hebben bevestigd.</li>
-            </ul>
-          </div>
-        </section>
-
-        {/* FAQ */}
-        <section className="bg-secondary">
-          <div className="mx-auto max-w-3xl px-5 py-20 md:py-28">
-            <h2 className="text-4xl font-extrabold md:text-5xl">Veelgestelde vragen</h2>
-            <div className="mt-10 divide-y divide-border rounded-2xl bg-card">
-              {faqs.map(([q, a]) => (
-                <details key={q} className="group px-6">
-                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-5 font-semibold">
-                    <h3 className="font-sans text-base">{q}</h3>
-                    <ChevronDown className="h-5 w-5 shrink-0 transition group-open:rotate-180" aria-hidden />
-                  </summary>
-                  <p className="pb-5 text-muted-foreground">{a}</p>
-                </details>
-              ))}
             </div>
           </div>
         </section>
@@ -279,24 +207,16 @@ function Index() {
               <p className="mt-4 text-lg text-muted-foreground">
                 Vertel ons wat je organiseert en welke spellen je wilt huren. We nemen persoonlijk contact met je op om de mogelijkheden te bespreken.
               </p>
-              <div className="mt-8 space-y-4">
-                {site.phones.map((p) => (
-                  <div key={p.tel} className="rounded-xl border bg-card p-4">
-                    <p className="font-display text-lg font-bold">{p.display}</p>
-                    <div className="mt-3 flex flex-wrap gap-2">
-                      <a href={`tel:${p.tel}`} className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-sm font-bold text-primary-foreground">
-                        <Phone className="h-4 w-4" /> Bel ons
-                      </a>
-                      <a href={waLink(p.wa)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-lg border-2 border-primary px-4 py-2 text-sm font-bold text-primary">
-                        <MessageCircle className="h-4 w-4" /> WhatsApp
-                      </a>
-                    </div>
-                  </div>
-                ))}
-                <p className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <Hammer className="h-4 w-4" /> Ophalen: {site.pickup}
-                </p>
+              <div className="mt-8 rounded-xl border bg-card p-5">
+                <p className="text-sm text-muted-foreground">Liever mailen?</p>
+                <a href={`mailto:${site.email}`} className="mt-1 inline-flex items-center gap-2 break-all font-display text-lg font-bold text-primary hover:underline">
+                  <Mail className="h-5 w-5 shrink-0" /> {site.email}
+                </a>
               </div>
+              <ul className="mt-6 space-y-2 text-sm text-muted-foreground">
+                <li className="flex gap-2"><MapPin className="mt-0.5 h-4 w-4 shrink-0" /> Ophalen in Eindhoven (omgeving De Hurk)</li>
+                <li className="flex gap-2"><Check className="mt-0.5 h-4 w-4 shrink-0" /> Bij verhuur vragen we een borg</li>
+              </ul>
             </div>
             <ContactForm selected={selected} setSelected={setSelected} />
           </div>
