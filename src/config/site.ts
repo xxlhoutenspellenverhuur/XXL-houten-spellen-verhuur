@@ -11,11 +11,11 @@ import zenuw2 from "@/assets/zenuwspiraal_2.jpeg.asset.json";
 export const site = {
   name: "XXL Hollandse Spellen",
   tagline: "Handgemaakt in Eindhoven",
-  slogan: "Grote spellen. Goede momenten.",
+  slogan: "Handgemaakt XXL spellen voor jouw feest of evenement",
   /** TODO vóór livegang: definitieve domeinnaam, bv. "https://www.jouwdomein.nl". Leeg = geen canonical. */
   domain: "",
   /** TODO vóór livegang: zakelijk e-mailadres. Leeg = wordt niet getoond. */
-  email: "",
+  email: "xxlhoutenspellenverhuur@gmail.com",
   phones: [
     { display: "+31 6 20815877", tel: "+31620815877", wa: "31620815877" },
     { display: "+31 6 46565162", tel: "+31646565162", wa: "31646565162" },
@@ -57,17 +57,17 @@ export const games: {
   {
     id: "zenuwspiraal",
     name: "Zenuwspiraal",
-    price: 20,
+    price: 17.5,
     description:
       "Heb jij een vaste hand en stalen zenuwen? Beweeg de ring van het ene uiteinde naar het andere zonder de bel te laten afgaan.",
     photo: { src: zenuw1.url, alt: "Speler concentreert zich op de handgemaakte zenuwspiraal" },
   },
   {
     id: "doolhof",
-    name: "XXL houten knikkerdoolhof",
+    name: "Houten knikkerdoolhof",
     price: 12.5,
     description:
-      "Navigeer de knikker door het houten doolhof en probeer de juiste route naar de finish te vinden. Een leuke uitdaging voor jong en oud.",
+      "Navigeer de knikker door het houten doolhof en probeer de juiste route naar de finish te vinden. ",
     photo: { src: doolhof1.url, alt: "Het XXL houten knikkerdoolhof wordt door twee spelers vastgehouden" },
   },
   {
@@ -87,4 +87,4 @@ export const separateTotal = games.reduce((s, g) => s + g.price, 0);
 export const euro = (n: number) =>
   new Intl.NumberFormat("nl-NL", { style: "currency", currency: "EUR", minimumFractionDigits: n % 1 ? 2 : 0 }).format(n);
 
-export const selectableOptions = [...games.map((g) => ({ id: g.id, name: g.name })), { id: pkg.id, name: pkg.name }];
+export const selectableOptions = [...games.map((g) => ({ id: g.id, name: g.name })), { id: pkg.id, name: "Het XXL-pakket" }, { id: "anders", name: "Anders / weet ik nog niet" }];
