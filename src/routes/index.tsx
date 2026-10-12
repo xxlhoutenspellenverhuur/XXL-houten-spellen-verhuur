@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { Phone, MessageCircle, MapPin, Check, Mail } from "lucide-react";
+import { Phone, MessageCircle, Mail } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Photo } from "@/components/site/Photo";
 import { ContactForm, type Sel } from "@/components/site/ContactForm";
@@ -81,30 +81,26 @@ function Index() {
         </section>
 
         {/* SPELLEN */}
-        <section id="spellen" className="mx-auto max-w-6xl px-5 py-20 md:py-28">
-          <p className="eyebrow text-accent">Onze spellen</p>
-          <h2 className="mt-3 max-w-2xl text-4xl font-extrabold md:text-5xl">Wat je bij ons kunt huren</h2>
-          <p className="mt-4 max-w-2xl text-lg text-muted-foreground">
-            Voor verjaardagen, borrels, bedrijfsfeesten, studentenactiviteiten of een bruiloft. Prijzen zijn per dag.
+        <section id="spellen" className="mx-auto max-w-5xl px-5 py-16 md:py-24">
+          <h2 className="text-3xl font-extrabold md:text-4xl">Onze spellen</h2>
+          <p className="mt-3 max-w-2xl text-muted-foreground">
+            Prijzen zijn per dag, plus een borg. Je haalt de spellen op in Eindhoven.
           </p>
-          <div className="mt-12 grid gap-6 sm:grid-cols-2">
-            {games.map((g) => (
-              <article key={g.id} className="flex flex-col overflow-hidden rounded-2xl bg-card shadow-card">
-                <div className="aspect-[4/3] overflow-hidden">
-                  <Photo photo={g.photo} className="h-full w-full transition duration-500 hover:scale-105" />
+          <div className="mt-10 divide-y divide-border border-y">
+            {games.map((g, i) => (
+              <article key={g.id} className="grid items-center gap-6 py-8 md:grid-cols-2 md:gap-10">
+                <div className={i % 2 ? "md:order-2" : ""}>
+                  <Photo photo={g.photo} className="aspect-[4/3] h-full w-full rounded-md" />
                 </div>
-                <div className="flex flex-1 flex-col p-6">
-                  <div className="flex items-baseline justify-between gap-4">
-                    <h3 className="text-2xl font-bold">{g.name}</h3>
-                    <p className="shrink-0 text-right font-display text-xl font-bold text-accent">
-                      {euro(g.price)}<span className="text-sm font-medium text-muted-foreground"> /dag</span>
-                      <span className="block font-sans text-xs font-medium text-muted-foreground">+ borg</span>
-                    </p>
-                  </div>
+                <div>
+                  <h3 className="text-2xl font-bold">{g.name}</h3>
+                  <p className="mt-1 font-display text-lg font-bold text-accent">
+                    {euro(g.price)} per dag <span className="font-sans text-sm font-medium text-muted-foreground">+ borg</span>
+                  </p>
                   <p className="mt-3 text-muted-foreground">{g.description}</p>
-                  {g.detail && <p className="mt-3 text-sm font-semibold">{g.detail}</p>}
-                  <button onClick={() => request(g.id)} className="mt-6 self-start rounded-lg border-2 border-primary px-5 py-3 font-bold text-primary transition hover:bg-primary hover:text-primary-foreground">
-                    Vraag dit spel aan
+                  {g.detail && <p className="mt-2 text-sm">{g.detail}</p>}
+                  <button onClick={() => request(g.id)} className="mt-5 font-bold text-primary underline underline-offset-4 hover:text-accent">
+                    Vraag dit spel aan →
                   </button>
                 </div>
               </article>
@@ -114,47 +110,30 @@ function Index() {
 
         {/* PAKKET */}
         <section className="bg-forest text-forest-foreground">
-          <div className="mx-auto grid max-w-6xl items-center gap-12 px-5 py-20 md:grid-cols-2 md:py-28">
+          <div className="mx-auto grid max-w-5xl items-center gap-10 px-5 py-16 md:grid-cols-2 md:py-20">
             <div>
               <p className="eyebrow text-wood-light">Het XXL-pakket</p>
-              <h2 className="mt-3 text-4xl font-extrabold md:text-5xl">Vier spellen. Eén compleet pakket.</h2>
-              <p className="mt-6 flex items-baseline gap-3">
-                <span className="font-display text-6xl font-extrabold text-wood-light">€49</span>
+              <h2 className="mt-3 text-3xl font-extrabold md:text-4xl">Alle vier de spellen</h2>
+              <p className="mt-5 flex items-baseline gap-3">
+                <span className="font-display text-5xl font-extrabold text-wood-light">€49</span>
                 <span className="text-lg">per dag</span>
               </p>
               <p className="mt-2 text-sm opacity-80">
-                Los samen {euro(separateTotal)} — je bespaart {euro(separateTotal - pkg.price)}
+                Los samen {euro(separateTotal)}, dus je bespaart {euro(separateTotal - pkg.price)}.
               </p>
-              <p className="mt-6 text-lg opacity-90">
-                Huur alle vier de spellen samen voor één vaste prijs.
-              </p>
-              <ul className="mt-6 space-y-2">
-                {games.map((g) => (
-                  <li key={g.id} className="flex items-center gap-3">
-                    <Check className="h-5 w-5 text-wood-light" /> {g.name}
-                  </li>
-                ))}
-              </ul>
-              <button onClick={() => request("pakket")} className="mt-8 rounded-lg bg-cta px-6 py-4 font-bold text-cta-foreground transition hover:brightness-110">
+              <p className="mt-5 opacity-90">{games.map((g) => g.name).join(", ")}.</p>
+              <button onClick={() => request("pakket")} className="mt-7 rounded-lg bg-cta px-6 py-3.5 font-bold text-cta-foreground hover:brightness-110">
                 Vraag het XXL-pakket aan
               </button>
             </div>
-            <div className="grid grid-cols-2 gap-3">
-              {games.map((g, i) => (
-                <div key={g.id} className={`overflow-hidden rounded-xl ${i % 2 ? "mt-8" : ""}`}>
-                  <Photo photo={g.photo} className="aspect-square h-full w-full" />
-                </div>
-              ))}
-            </div>
+            <Photo photo={photos.jengaAction} className="aspect-[4/3] w-full rounded-md" />
           </div>
         </section>
 
         {/* OVER ONS */}
         <section id="verhaal" className="bg-secondary">
           <div className="mx-auto grid max-w-6xl items-center gap-10 px-5 py-16 md:grid-cols-2 md:py-24">
-            <div className="overflow-hidden rounded-2xl shadow-card">
-              <Photo photo={photos.story} className="aspect-[4/3] h-full w-full" />
-            </div>
+            <Photo photo={photos.story} className="aspect-[4/3] h-full w-full rounded-md" />
             <div>
               <p className="eyebrow text-accent">Over ons</p>
               <h2 className="mt-3 text-3xl font-extrabold md:text-4xl">Hoi, wij zijn Eric en Timo</h2>
@@ -164,12 +143,9 @@ function Index() {
                 <p>Wat begon met het idee om één spel te maken, beviel erg goed. Inmiddels zitten we al op vier spellen, en er komen er nog meer.</p>
                 <p>We vinden het mooi dat mensen veel plezier beleven aan onze zelfgemaakte spellen. Daarom verhuren we ze aan iedereen die zijn feest, borrel of evenement net wat leuker wil maken.</p>
               </div>
-              <div className="mt-6 flex flex-wrap gap-3">
-                {[["E", "Eric", "Applied Physics"], ["T", "Timo", "Urban Systems and Real Estate"]].map(([i, n, s]) => (
-                  <div key={n} className="flex items-center gap-3 rounded-full bg-card py-2 pl-2 pr-5">
-                    <span className="flex h-9 w-9 items-center justify-center rounded-full bg-primary font-bold text-primary-foreground">{i}</span>
-                    <span className="text-sm"><strong>{n}</strong> — {s}</span>
-                  </div>
+              <div className="mt-6 flex flex-col gap-1">
+                {[["Eric", "Applied Physics"], ["Timo", "Urban Systems and Real Estate"]].map(([n, s]) => (
+                  <p key={n} className="text-sm"><strong>{n}</strong> — {s}</p>
                 ))}
               </div>
             </div>
@@ -177,24 +153,23 @@ function Index() {
         </section>
 
         {/* CONTACT */}
-        <section id="contact" className="mx-auto max-w-6xl px-5 py-20 md:py-28">
+        <section id="contact" className="mx-auto max-w-5xl px-5 py-16 md:py-24">
           <div className="grid gap-10 lg:grid-cols-[1fr_1.6fr]">
             <div>
               <p className="eyebrow text-accent">Contact</p>
-              <h2 className="mt-3 text-4xl font-extrabold md:text-5xl">Aanvraag doen</h2>
+              <h2 className="mt-3 text-3xl font-extrabold md:text-4xl">Aanvraag doen</h2>
               <p className="mt-4 text-lg text-muted-foreground">
                 Laat weten wanneer en welke spellen je wilt huren. We reageren zelf en checken of ze vrij zijn.
               </p>
-              <div className="mt-8 rounded-xl border bg-card p-5">
-                <p className="text-sm text-muted-foreground">Liever mailen?</p>
-                <a href={`mailto:${site.email}`} className="mt-1 inline-flex items-center gap-2 break-all font-display text-lg font-bold text-primary hover:underline">
-                  <Mail className="h-5 w-5 shrink-0" /> {site.email}
-                </a>
-              </div>
-              <ul className="mt-6 space-y-2 text-sm text-muted-foreground">
-                <li className="flex gap-2"><MapPin className="mt-0.5 h-4 w-4 shrink-0" /> Ophalen in Eindhoven (omgeving De Hurk)</li>
-                <li className="flex gap-2"><Check className="mt-0.5 h-4 w-4 shrink-0" /> Bij verhuur vragen we een borg</li>
-              </ul>
+              <p className="mt-6 text-muted-foreground">
+                Liever mailen?{" "}
+                <a href={`mailto:${site.email}`} className="break-all font-semibold text-primary underline underline-offset-4">{site.email}</a>
+              </p>
+              <ol className="mt-8 space-y-3 border-l-2 border-wood-light pl-5 text-sm">
+                <li><strong>1.</strong> Stuur je aanvraag met datum en spellen.</li>
+                <li><strong>2.</strong> Wij checken of alles vrij is en bevestigen het persoonlijk.</li>
+                <li><strong>3.</strong> Je haalt de spellen op in Eindhoven (omgeving De Hurk). Bij verhuur vragen we een borg.</li>
+              </ol>
             </div>
             <ContactForm selected={selected} setSelected={setSelected} />
           </div>
