@@ -26,7 +26,7 @@ export const submitRequest = createServerFn({ method: "POST" })
     // 1. E-mail naar ons via FormSubmit (gratis). Alleen bij succes melden we "verstuurd".
     let res: Response;
     try {
-      res = await fetch(`https://formsubmit.co/ajax/${site.email}`, {
+      res = await fetch(`https://formsubmit.co/ajax/${site.formSubmitId}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
