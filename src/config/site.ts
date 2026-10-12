@@ -16,6 +16,8 @@ export const site = {
   domain: "",
   /** Gepubliceerde URL; FormSubmit koppelt aanvragen aan deze website. */
   formOrigin: "https://xxl-houten-spellen-verhuur.lovable.app",
+  /** FormSubmit-code (vervangt het kale e-mailadres in het formulieradres). */
+  formSubmitId: "b4b4d0b163b2a9a917fd25f48b83ce82",
   /** TODO vóór livegang: zakelijk e-mailadres. Leeg = wordt niet getoond. */
   email: "xxlhoutenspellenverhuur@gmail.com",
   phones: [
