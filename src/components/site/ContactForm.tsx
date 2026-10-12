@@ -46,7 +46,7 @@ export function ContactForm({ selected, setSelected }: { selected: Sel[]; setSel
 
   if (status === "done") {
     return (
-      <div role="status" className="rounded-2xl bg-card p-8 text-center shadow-card md:p-12">
+      <div role="status" className="rounded-md border bg-card p-8 text-center md:p-12">
         <CheckCircle2 className="mx-auto h-12 w-12 text-primary" />
         <p className="mt-4 font-display text-2xl font-bold">Aanvraag verstuurd!</p>
         <p className="mt-2 text-muted-foreground">Bedankt, we hebben je aanvraag ontvangen en nemen zo snel mogelijk contact met je op.</p>
@@ -57,7 +57,7 @@ export function ContactForm({ selected, setSelected }: { selected: Sel[]; setSel
   const err = (k: keyof Errors) => errors[k] && <p id={`e-${k}`} className="mt-1 text-sm text-destructive">{errors[k]}</p>;
 
   return (
-    <form onSubmit={onSubmit} noValidate className="rounded-2xl bg-card p-6 shadow-card md:p-8">
+    <form onSubmit={onSubmit} noValidate className="rounded-md border bg-card p-6 md:p-8">
       <div className="grid gap-5 sm:grid-cols-2">
         <div>
           <label htmlFor="f-name" className={label}>Naam *</label>
