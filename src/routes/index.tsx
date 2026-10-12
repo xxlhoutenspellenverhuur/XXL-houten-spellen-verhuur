@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { Phone, MessageCircle, MapPin, Check, Mail } from "lucide-react";
+import { Phone, MessageCircle, Mail } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Photo } from "@/components/site/Photo";
 import { ContactForm, type Sel } from "@/components/site/ContactForm";

@@ -23,8 +23,10 @@ export function ContactForm({ selected, setSelected }: { selected: Sel[]; setSel
     setV({ ...v, [k]: e.target.value });
   const toggle = (id: Sel) => setSelected(selected.includes(id) ? selected.filter((s) => s !== id) : [...selected, id]);
 
+  const busy = useRef(false);
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
+    if (busy.current) return;
     const errs: Errors = {};
     if (!v.name.trim()) errs.name = "Vul je naam in.";
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.email.trim())) errs.email = "Vul een geldig e-mailadres in.";
@@ -35,12 +37,15 @@ export function ContactForm({ selected, setSelected }: { selected: Sel[]; setSel
       document.getElementById(`f-${first}`)?.focus();
       return;
     }
+    busy.current = true;
     setStatus("sending");
     try {
       await submit({ data: { ...v, games: selected, startedAt: startedAt.current } });
       setStatus("done");
     } catch {
       setStatus("error");
+    } finally {
+      busy.current = false;
     }
   }
 
@@ -49,7 +54,7 @@ export function ContactForm({ selected, setSelected }: { selected: Sel[]; setSel
       <div role="status" className="rounded-md border bg-card p-8 text-center md:p-12">
         <CheckCircle2 className="mx-auto h-12 w-12 text-primary" />
         <p className="mt-4 font-display text-2xl font-bold">Aanvraag verstuurd!</p>
-        <p className="mt-2 text-muted-foreground">Bedankt, we hebben je aanvraag ontvangen en nemen zo snel mogelijk contact met je op.</p>
+        <p className="mt-2 text-muted-foreground">Bedankt! We nemen zo snel mogelijk contact met je op. Let op: dit is nog geen reservering, we bevestigen de beschikbaarheid persoonlijk.</p>
       </div>
     );
   }
@@ -109,7 +114,7 @@ export function ContactForm({ selected, setSelected }: { selected: Sel[]; setSel
 
       <button type="submit" disabled={status === "sending"} className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-cta px-6 py-4 font-bold text-cta-foreground transition hover:brightness-110 disabled:opacity-70 sm:w-auto">
         {status === "sending" && <Loader2 className="h-5 w-5 animate-spin" />}
-        Aanvraag versturen
+        {status === "sending" ? "Bezig met versturen…" : "Aanvraag versturen"}
       </button>
       <p className="mt-4 text-xs text-muted-foreground">
         Een aanvraag is nog geen reservering, we bevestigen de beschikbaarheid persoonlijk.{" "}

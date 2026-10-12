@@ -14,6 +14,8 @@ export const site = {
   slogan: "Handgemaakt XXL spellen voor jouw feest of evenement",
   /** TODO vóór livegang: definitieve domeinnaam, bv. "https://www.jouwdomein.nl". Leeg = geen canonical. */
   domain: "",
+  /** Gepubliceerde URL; FormSubmit koppelt aanvragen aan deze website. */
+  formOrigin: "https://xxl-houten-spellen-verhuur.lovable.app",
   /** TODO vóór livegang: zakelijk e-mailadres. Leeg = wordt niet getoond. */
   email: "xxlhoutenspellenverhuur@gmail.com",
   phones: [
