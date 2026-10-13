@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { CheckCircle2, Loader2 } from "lucide-react";
-import { selectableOptions } from "@/config/site";
+import { selectableOptions, site } from "@/config/site";
 import { submitRequest } from "@/lib/requests.functions";
 
 export type Sel = (typeof selectableOptions)[number]["id"];
@@ -40,7 +40,36 @@ export function ContactForm({ selected, setSelected }: { selected: Sel[]; setSel
     busy.current = true;
     setStatus("sending");
     try {
-      await submit({ data: { ...v, games: selected, startedAt: startedAt.current } });
+      // Honeypot / te snel ingevuld: stil negeren
+      if (v.website || Date.now() - startedAt.current < 2500) {
+        setStatus("done");
+        return;
+      }
+      const names = selected.map((g) => selectableOptions.find((o) => o.id === g)?.name ?? g).join(", ");
+      const res = await fetch(`https://formsubmit.co/ajax/${site.formSubmitId}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          _subject: `Nieuwe aanvraag: ${v.name.trim()} (${v.date})`,
+          _replyto: v.email.trim(),
+          _template: "table",
+          _captcha: "false",
+          _honey: "",
+          Naam: v.name.trim(),
+          "E-mail": v.email.trim(),
+          Telefoon: v.phone.trim() || "-",
+          "Gewenste datum": v.date,
+          Spellen: names || "-",
+          Bericht: v.message.trim() || "-",
+        }),
+      });
+      const j = (await res.json().catch(() => ({}))) as { success?: string | boolean; message?: string };
+      if (!res.ok || !(j.success === true || j.success === "true")) {
+        console.error("formsubmit failed", res.status, j);
+        throw new Error("Versturen mislukt");
+      }
+      // Back-up opslaan; mag de melding niet laten mislukken
+      submit({ data: { ...v, games: selected, startedAt: startedAt.current } }).catch(() => {});
       setStatus("done");
     } catch {
       setStatus("error");
