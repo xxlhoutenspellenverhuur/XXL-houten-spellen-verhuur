@@ -1,7 +1,6 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { supabase } from "@/integrations/supabase/client";
-import { site, selectableOptions } from "@/config/site";
 
 const allowed = ["jenga", "zenuwspiraal", "doolhof", "pittenzak", "pakket", "anders"] as const;
 
@@ -21,51 +20,8 @@ export const submitRequest = createServerFn({ method: "POST" })
   .handler(async ({ data }) => {
     if (data.website || Date.now() - data.startedAt < 2500) return { ok: true };
 
-    const names = data.games.map((g) => selectableOptions.find((o) => o.id === g)?.name ?? g).join(", ");
-
-    // 1. E-mail naar ons via FormSubmit (gratis). Alleen bij succes melden we "verstuurd".
-    let res: Response;
-    try {
-      res = await fetch(`https://formsubmit.co/ajax/${site.formSubmitId}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          Origin: site.formOrigin,
-          Referer: site.formOrigin + "/",
-        },
-        body: JSON.stringify({
-          _subject: `Nieuwe aanvraag: ${data.name} (${data.date})`,
-          _replyto: data.email,
-          _template: "table",
-          _captcha: "false",
-          _honey: "",
-          Naam: data.name,
-          "E-mail": data.email,
-          Telefoon: data.phone || "-",
-          "Gewenste datum": data.date,
-          Spellen: names || "-",
-          Bericht: data.message || "-",
-        }),
-      });
-    } catch (e) {
-      console.error("formsubmit network error", e);
-      throw new Error("Versturen mislukt");
-    }
-    const text = await res.text();
-    let ok = res.ok;
-    try {
-      const j = JSON.parse(text) as { success?: string | boolean };
-      ok = ok && (j.success === true || j.success === "true");
-    } catch {
-      ok = false;
-    }
-    if (!ok) {
-      console.error("formsubmit failed", res.status, text);
-      throw new Error("Versturen mislukt");
-    }
-
-    // 2. Back-up in Lovable Cloud (mag de verzending niet laten mislukken)
+    // Back-up in Lovable Cloud. De e-mail gaat rechtstreeks vanuit de browser via FormSubmit
+    // (vanaf een gedeelde server geeft FormSubmit een rate limit).
     const { error } = await supabase.from("booking_requests").insert({
       name: data.name,
       email: data.email,
